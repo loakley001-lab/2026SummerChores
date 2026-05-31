@@ -12,10 +12,7 @@ body { font-family: 'Nunito', sans-serif; background: #fdf2f8; min-height: 100vh
 .header { background: linear-gradient(135deg, #f9a8d4, #db2777); border-radius: 20px; padding: 18px 20px; margin-bottom: 14px; color: white; text-align: center; }
 .header h1 { font-size: 24px; font-weight: 900; }
 .header .sub { font-size: 13px; opacity: 0.85; margin-top: 3px; }
-.week-row { display: flex; gap: 8px; align-items: center; margin-top: 10px; }
-.week-row span { font-size: 11px; opacity: 0.8; }
-.week-input { background: rgba(255,255,255,0.25); border: none; border-radius: 8px; color: white; font-family: 'Nunito', sans-serif; font-size: 13px; font-weight: 700; padding: 5px 10px; flex: 1; }
-.week-input::placeholder { color: rgba(255,255,255,0.6); }
+.week-display { font-size: 12px; opacity: 0.85; margin-top: 8px; }
 .reward-bar { background: #fef3c7; border: 2px solid #fbbf24; border-radius: 14px; padding: 10px 14px; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
 .reward-text { font-size: 12px; color: #92400e; font-weight: 700; line-height: 1.3; }
 .prog-wrap { margin-bottom: 12px; }
@@ -26,7 +23,7 @@ body { font-family: 'Nunito', sans-serif; background: #fdf2f8; min-height: 100vh
 .earn-card { background: white; border-radius: 12px; padding: 10px 12px; text-align: center; }
 .earn-val { font-size: 22px; font-weight: 900; color: #db2777; }
 .earn-lbl { font-size: 11px; color: #6b7280; font-weight: 600; }
-.sec-title { font-size: 13px; font-weight: 900; color: #9d174d; text-transform: uppercase; letter-spacing: 0.5px; margin: 16px 0 8px; display: flex; align-items: center; gap: 6px; }
+.sec-title { font-size: 13px; font-weight: 900; color: #9d174d; text-transform: uppercase; letter-spacing: 0.5px; margin: 16px 0 8px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
 .sec-badge { background: #db2777; color: white; font-size: 10px; font-weight: 800; border-radius: 6px; padding: 2px 7px; }
 .sec-badge.bonus { background: #059669; }
 .chore-card { background: white; border-radius: 14px; padding: 10px 14px; margin-bottom: 8px; }
@@ -38,10 +35,13 @@ body { font-family: 'Nunito', sans-serif; background: #fdf2f8; min-height: 100vh
 .day-btn { border: 2px solid #fbcfe8; border-radius: 8px; background: transparent; padding: 5px 0; cursor: pointer; font-family: 'Nunito', sans-serif; font-size: 10px; font-weight: 800; color: #db2777; transition: all 0.15s; }
 .day-btn.on { background: #db2777; border-color: #db2777; color: white; }
 .day-btn.na { background: #f3f4f6; border-color: transparent; color: #d1d5db; cursor: default; }
-.bf-row { display: flex; align-items: center; gap: 8px; margin-top: 8px; padding-top: 8px; border-top: 1px solid #fce7f3; }
-.bf-row label { font-size: 11px; color: #db2777; font-weight: 800; white-space: nowrap; }
-.bf-input { flex: 1; border: 1.5px solid #fbcfe8; border-radius: 8px; padding: 5px 10px; font-family: 'Nunito', sans-serif; font-size: 12px; color: #374151; background: #fdf2f8; }
+.bf-section { margin-top: 10px; padding-top: 10px; border-top: 1px solid #fce7f3; }
+.bf-section label { font-size: 11px; color: #db2777; font-weight: 800; display: block; margin-bottom: 6px; }
+.bf-day-row { display: flex; align-items: center; gap: 6px; margin-bottom: 5px; }
+.bf-day-label { font-size: 11px; font-weight: 800; color: #be185d; width: 24px; text-align: center; }
+.bf-input { flex: 1; border: 1.5px solid #fbcfe8; border-radius: 8px; padding: 4px 8px; font-family: 'Nunito', sans-serif; font-size: 12px; color: #374151; background: #fdf2f8; }
 .bf-input:focus { outline: none; border-color: #f9a8d4; }
+.bf-input:disabled { background: #f3f4f6; color: #9ca3af; border-color: #e5e7eb; }
 .chk { width: 28px; height: 28px; border: 2px solid #fbcfe8; border-radius: 8px; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.15s; }
 .chk.on { background: #db2777; border-color: #db2777; }
 .chk svg { display: none; }
@@ -56,6 +56,7 @@ body { font-family: 'Nunito', sans-serif; background: #fdf2f8; min-height: 100vh
 .req-btn { background: #f59e0b; border: none; border-radius: 10px; color: white; font-family: 'Nunito', sans-serif; font-size: 12px; font-weight: 800; padding: 7px 14px; cursor: pointer; }
 .req-btn:disabled { opacity: 0.4; cursor: default; }
 .pending-tag { background: #fde68a; color: #92400e; font-size: 11px; font-weight: 800; border-radius: 8px; padding: 3px 8px; margin: 4px 4px 0 0; display: inline-block; }
+.approved-tag { background: #d1fae5; color: #065f46; font-size: 11px; font-weight: 800; border-radius: 8px; padding: 3px 8px; margin: 4px 4px 0 0; display: inline-block; }
 .goal-sec { background: white; border: 2px solid #fbcfe8; border-radius: 14px; padding: 14px; margin-top: 14px; }
 .goal-title { font-size: 12px; font-weight: 800; color: #be185d; text-transform: uppercase; margin-bottom: 8px; }
 .goal-input { width: 100%; border: 1.5px solid #fbcfe8; border-radius: 8px; padding: 7px 10px; font-family: 'Nunito', sans-serif; font-size: 14px; font-weight: 700; color: #831843; background: #fdf2f8; }
@@ -64,6 +65,8 @@ body { font-family: 'Nunito', sans-serif; background: #fdf2f8; min-height: 100vh
 .copy-btn { width: 100%; background: white; border: 2px solid #f9a8d4; border-radius: 16px; color: #db2777; font-family: 'Nunito', sans-serif; font-size: 15px; font-weight: 900; padding: 14px; cursor: pointer; margin-top: 10px; }
 .sub-btn { width: 100%; background: linear-gradient(135deg, #f9a8d4, #db2777); border: none; border-radius: 16px; color: white; font-family: 'Nunito', sans-serif; font-size: 17px; font-weight: 900; padding: 16px; cursor: pointer; margin-top: 10px; margin-bottom: 24px; }
 .sub-btn:disabled { opacity: 0.6; cursor: default; }
+.locked-banner { background: #fdf2f8; border: 2px solid #f9a8d4; border-radius: 14px; padding: 14px; margin-top: 10px; margin-bottom: 24px; text-align: center; font-size: 14px; font-weight: 800; color: #be185d; }
+.sunday-banner { background: #fef2f2; border: 2px solid #f87171; border-radius: 14px; padding: 12px 14px; margin-bottom: 14px; font-size: 13px; font-weight: 800; color: #b91c1c; text-align: center; }
 .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: #db2777; color: white; font-family: 'Nunito', sans-serif; font-weight: 800; padding: 12px 24px; border-radius: 14px; font-size: 14px; opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 99; white-space: nowrap; }
 .toast.show { opacity: 1; }
 .modal-bg { position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 100; padding: 20px; }
@@ -82,8 +85,9 @@ body { font-family: 'Nunito', sans-serif; background: #fdf2f8; min-height: 100vh
     <div style="font-size:32px;margin-bottom:4px">🌺🎭🌟</div>
     <h1>Aria's Summer Chart</h1>
     <div class="sub">Finish ALL must-do tasks = 4 hrs of screen time!</div>
-    <div style="font-size:12px;opacity:0.85;margin-top:8px" id="weekDisplay"></div>
+    <div class="week-display" id="weekDisplay"></div>
   </div>
+  <div id="sundayBanner"></div>
   <div class="reward-bar">
     <span style="font-size:24px">🏆</span>
     <span class="reward-text">Complete everything in <strong>Must Do</strong> to unlock <strong>4 hours of screen time</strong> this weekend!</span>
@@ -96,37 +100,29 @@ body { font-family: 'Nunito', sans-serif; background: #fdf2f8; min-height: 100vh
     <div class="earn-card"><div class="earn-val" id="weekEarn">$0</div><div class="earn-lbl">This week</div></div>
     <div class="earn-card"><div class="earn-val" id="summerEarn">$0</div><div class="earn-lbl">Summer total</div></div>
   </div>
-
   <div class="sec-title">✅ Must Do <span class="sec-badge">Required for screen time</span></div>
   <div id="mustWrap"></div>
-
   <div class="sec-title">⭐ Bonus Chores <span class="sec-badge bonus">Extra cash or screen time</span></div>
   <div class="extra-wrap" id="extraWrap"></div>
-
   <div class="gt-card">
     <div class="gt-title">🎮 Screen Time Bank</div>
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
       <div><div class="gt-val" id="gameTime">0 hrs</div><div style="font-size:12px;color:#92400e;font-weight:600">Earned this week</div></div>
-      <button class="req-btn" id="reqBtn" onclick="requestGameTime()" disabled>Request +15 min ($5)</button>
+      <button class="req-btn" id="reqBtn" onclick="requestScreenTime()" disabled>Request +15 min ($5)</button>
     </div>
     <div id="pendingTags"></div>
     <div style="font-size:11px;color:#92400e;font-weight:600;margin-top:6px">Mom approves extra screen time requests 😊</div>
   </div>
-
   <div class="goal-sec">
     <div class="goal-title">🎯 My Summer Goal</div>
     <input class="goal-input" type="text" id="goalInput" placeholder="e.g. Save $75 for new clothes..." />
     <div class="goal-prog" id="goalProg"></div>
   </div>
-
   <button class="copy-btn" onclick="copyToClipboard()">📋 Copy Week Summary</button>
-  <button class="sub-btn" id="subBtn" onclick="confirmSubmit()">✅ Submit My Week!</button>
+  <div id="submitArea"></div>
 </div>
 <div class="toast" id="toast"></div>
 <script>
-// ============================================================
-// EDIT CHORES HERE
-// ============================================================
 const ARIA = {
   habits: [
     { id:'ah1', name:'Eat a healthy breakfast', freq:'Daily', days:[0,1,2,3,4,5,6], hasBreakfast:true },
@@ -142,7 +138,7 @@ const ARIA = {
   ],
   weekly: [
     { id:'aw1', name:'Take out recycling', freq:'As needed', pay:1 },
-    { id:'aw2', name:'Put away clean laundry (hang shirts, dresses, pants)', freq:'Weekly', pay:5 },
+    { id:'aw2', name:'Put away clean laundry', freq:'Weekly', pay:5 },
     { id:'aw3', name:'Clean room before Tuesday morning', freq:'Weekly', pay:3 },
     { id:'aw4', name:'Wash hair', freq:'2x/week', pay:2, days:[2,5] },
   ],
@@ -163,14 +159,26 @@ const ARIA = {
   ]
 };
 const SHEET_URL = 'https://script.google.com/macros/s/AKfycbzs8cRLrwDP5iV38T0t34042mlCbHiqLW_HQ3SCPssRY7IP9vrhf7WpxtCa-ZNBiX8q/exec';
-
 const DAYS = ['S','M','T','W','T','F','S'];
+const DAYNAMES = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
 let checked = JSON.parse(localStorage.getItem('aria_checked')||'{}');
 let weeklyChecked = JSON.parse(localStorage.getItem('aria_weekly')||'{}');
 let extraChecked = JSON.parse(localStorage.getItem('aria_extra')||'{}');
 let breakfasts = JSON.parse(localStorage.getItem('aria_bfs')||'{}');
 let pendingReqs = JSON.parse(localStorage.getItem('aria_pending')||'[]');
 let summerTotal = parseFloat(localStorage.getItem('aria_summer')||'0');
+let submittedWeek = localStorage.getItem('aria_submitted_week')||'';
+
+function getWeekOf() {
+  const now = new Date();
+  const day = now.getDay();
+  const monday = new Date(now);
+  monday.setDate(now.getDate() - (day === 0 ? 6 : day - 1));
+  return monday.toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'});
+}
+
+function isSubmittedThisWeek() { return submittedWeek === getWeekOf(); }
 
 function save() {
   localStorage.setItem('aria_checked', JSON.stringify(checked));
@@ -180,7 +188,7 @@ function save() {
   localStorage.setItem('aria_pending', JSON.stringify(pendingReqs));
   localStorage.setItem('aria_summer', summerTotal);
   localStorage.setItem('aria_goal', document.getElementById('goalInput').value);
-  // week date is auto-set
+  localStorage.setItem('aria_submitted_week', submittedWeek);
 }
 
 function calcEarnings() {
@@ -218,7 +226,7 @@ function update() {
   tags.innerHTML = '';
   pendingReqs.forEach(r => {
     const t = document.createElement('span');
-    t.className = 'pending-tag';
+    t.className = r.approved ? 'approved-tag' : 'pending-tag';
     t.textContent = r.approved ? '✅ +15 min approved!' : '⏳ +15 min pending...';
     tags.appendChild(t);
   });
@@ -228,6 +236,12 @@ function update() {
     const tot = summerTotal+w;
     gp.textContent = '$'+tot.toFixed(2)+' of $'+goalNum.toFixed(2)+' - '+Math.min(100,Math.round(tot/goalNum*100))+'% there!';
   } else { gp.textContent=''; }
+  const sa = document.getElementById('submitArea');
+  if (isSubmittedThisWeek()) {
+    sa.innerHTML = '<div class="locked-banner">✅ Week submitted! See you next Monday 🎉</div>';
+  } else {
+    sa.innerHTML = '<button class="sub-btn" id="subBtn" onclick="confirmSubmit()">✅ Submit My Week!</button>';
+  }
   save();
 }
 
@@ -240,6 +254,13 @@ function mkChk(isOn, onclick) {
 }
 
 function render() {
+  const wo = getWeekOf();
+  document.getElementById('weekDisplay').textContent = 'Week of ' + wo;
+  const sb = document.getElementById('sundayBanner');
+  if (new Date().getDay() === 0 && !isSubmittedThisWeek()) {
+    sb.innerHTML = '<div class="sunday-banner">⚠️ It\'s Sunday! Don\'t forget to tap <strong>Submit My Week</strong> before the week resets!</div>';
+  }
+
   const mw = document.getElementById('mustWrap');
   mw.innerHTML = '';
 
@@ -257,19 +278,39 @@ function render() {
       const key = h.id+'_'+i;
       btn.className = 'day-btn'+(h.days.includes(i)?'':' na')+(checked[key]?' on':'');
       btn.textContent = d;
-      if (h.days.includes(i)) btn.onclick = () => { checked[key]=!checked[key]; btn.classList.toggle('on'); update(); };
+      if (h.days.includes(i)) btn.onclick = () => { checked[key]=!checked[key]; btn.classList.toggle('on'); if(h.hasBreakfast) updateBreakfastFields(h.id); update(); };
       else btn.disabled = true;
       grid.appendChild(btn);
     });
     card.appendChild(grid);
     if (h.hasBreakfast) {
-      const br = document.createElement('div');
-      br.className = 'bf-row';
-      br.innerHTML = '<label>🍳 What did you eat?</label><input class="bf-input" type="text" placeholder="e.g. cereal and fruit" />';
-      const inp = br.querySelector('input');
-      inp.value = breakfasts[h.id]||'';
-      inp.addEventListener('input', e => { breakfasts[h.id]=e.target.value; save(); });
-      card.appendChild(br);
+      const bfs = document.createElement('div');
+      bfs.className = 'bf-section';
+      bfs.innerHTML = '<label>🍳 What did you eat each day?</label>';
+      h.days.forEach(i => {
+        const row2 = document.createElement('div');
+        row2.className = 'bf-day-row';
+        const lbl = document.createElement('span');
+        lbl.className = 'bf-day-label';
+        lbl.textContent = DAYNAMES[i];
+        const inp = document.createElement('input');
+        inp.className = 'bf-input';
+        inp.type = 'text';
+        inp.placeholder = 'e.g. cereal and fruit';
+        inp.dataset.day = i;
+        inp.value = (breakfasts[h.id] && breakfasts[h.id][i]) ? breakfasts[h.id][i] : '';
+        inp.disabled = !checked[h.id+'_'+i];
+        inp.addEventListener('input', e => {
+          if (!breakfasts[h.id]) breakfasts[h.id] = {};
+          breakfasts[h.id][i] = e.target.value;
+          save();
+        });
+        row2.appendChild(lbl);
+        row2.appendChild(inp);
+        bfs.appendChild(row2);
+      });
+      bfs.id = 'bf_'+h.id;
+      card.appendChild(bfs);
     }
     mw.appendChild(card);
   });
@@ -331,11 +372,19 @@ function render() {
   });
 
   document.getElementById('goalInput').value = localStorage.getItem('aria_goal')||'';
-  const wo = getWeekOf(); document.getElementById('weekDisplay').textContent = 'Week of ' + wo;
   update();
 }
 
-function requestGameTime() {
+function updateBreakfastFields(habitId) {
+  const section = document.getElementById('bf_'+habitId);
+  if (!section) return;
+  section.querySelectorAll('.bf-input').forEach(inp => {
+    const day = parseInt(inp.dataset.day);
+    inp.disabled = !checked[habitId+'_'+day];
+  });
+}
+
+function requestScreenTime() {
   if (calcEarnings() < 5) return;
   pendingReqs.push({approved:false, ts:new Date().toISOString()});
   update();
@@ -346,48 +395,57 @@ function copyToClipboard() {
   const wo = getWeekOf();
   const w = calcEarnings();
   const pct = calcProgress();
-  const bfVal = breakfasts['ah1']||'(not entered)';
+  const bfLog = Object.entries(breakfasts['ah1']||{}).map(([d,v])=>DAYNAMES[parseInt(d)]+': '+v).join(', ');
   const weeklyDone = ARIA.weekly.map(p => {
     if (p.days) { const cnt=p.days.filter(i=>weeklyChecked[p.id+'_'+i]).length; return p.name+': '+cnt+'/'+p.days.length; }
     return p.name+': '+(weeklyChecked[p.id]?'done':'not done');
-  }).join(', ');
+  }).join(' | ');
   const extraDone = ARIA.extra.filter(e=>extraChecked[e.id]).map(e=>e.name+' $'+e.pay).join(', ')||'none';
-  const text = ['=== ARIA WEEK SUMMARY ===','Week of: '+wo,'Submitted: '+new Date().toLocaleString(),'','Must-Do progress: '+pct+'%','Breakfast: '+bfVal,'Weekly chores: '+weeklyDone,'Bonus chores: '+extraDone,'Week earnings: $'+w.toFixed(2),'Summer total: $'+(summerTotal+w).toFixed(2),'Extra screen time requests: '+pendingReqs.length,'Goal: '+(document.getElementById('goalInput').value||'(not set)')].join('\n');
+  const text = ['=== ARIA WEEK SUMMARY ===','Week of: '+wo,'','Must-Do: '+pct+'%','Breakfasts: '+bfLog,'Weekly chores: '+weeklyDone,'Bonus chores: '+extraDone,'Week earnings: $'+w.toFixed(2),'Summer total: $'+(summerTotal+w).toFixed(2),'Screen time requests: '+pendingReqs.length,'Goal: '+(document.getElementById('goalInput').value||'(not set)')].join('\n');
   navigator.clipboard.writeText(text).then(()=>showToast('📋 Copied!')).catch(()=>{ const ta=document.createElement('textarea'); ta.value=text; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta); showToast('📋 Copied!'); });
 }
 
 function confirmSubmit() {
-  const wo = getWeekOf();
-  
   const bg = document.createElement('div');
   bg.className = 'modal-bg';
-  bg.innerHTML = '<div class="modal"><h2>Submit this week? 🎉</h2><p>This sends your progress to Mom and resets for next week!</p><div class="modal-btns"><button class="modal-btn mbtn-cancel" onclick="this.closest(\'.modal-bg\').remove()">Not yet</button><button class="modal-btn mbtn-go" onclick="doSubmit()">Yes, submit!</button></div></div>';
+  bg.innerHTML = '<div class="modal"><h2>Submit this week? 🎉</h2><p>This sends your progress to Mom and locks until next Monday!</p><div class="modal-btns"><button class="modal-btn mbtn-cancel" onclick="this.closest(\'.modal-bg\').remove()">Not yet</button><button class="modal-btn mbtn-go" onclick="doSubmit()">Yes, submit!</button></div></div>';
   document.body.appendChild(bg);
 }
 
 async function doSubmit() {
   document.querySelector('.modal-bg')?.remove();
   const btn = document.getElementById('subBtn');
-  btn.disabled=true; btn.textContent='⏳ Sending...';
+  if (btn) { btn.disabled=true; btn.textContent='⏳ Sending...'; }
   const wo = getWeekOf();
   const w = calcEarnings();
-  const extraDone = ARIA.extra.filter(e=>extraChecked[e.id]).map(e=>e.name).join(', ');
-  const payload = { kid:'Aria', weekOf:wo, habitProgress:calcProgress()+'%', breakfast:breakfasts['ah1']||'', extraChores:extraDone, weekEarnings:w, summerTotal:summerTotal+w, gameTimeRequests:pendingReqs.length, goal:document.getElementById('goalInput').value };
+  const pct = calcProgress();
+  const bfLog = Object.entries(breakfasts['ah1']||{}).map(([d,v])=>DAYNAMES[parseInt(d)]+': '+v).join(' | ');
+  const habitSummary = ARIA.habits.map(h=>{ const d=h.days.filter(i=>checked[h.id+'_'+i]).length; return h.name+': '+d+'/'+h.days.length; }).join(' | ');
+  const weeklyDone = ARIA.weekly.map(p=>{ if(p.days){const c=p.days.filter(i=>weeklyChecked[p.id+'_'+i]).length; return p.name+': '+c+'/'+p.days.length;} return p.name+': '+(weeklyChecked[p.id]?'done':'not done'); }).join(' | ');
+  const extraDone = ARIA.extra.filter(e=>extraChecked[e.id]).map(e=>e.name+' ($'+e.pay+')').join(', ');
+  const payload = {
+    kid:'Aria', weekOf:wo, habitProgress:pct+'%',
+    breakfast:bfLog, habitSummary, weeklyChores:weeklyDone,
+    extraChores:extraDone, weekEarnings:'$'+w.toFixed(2),
+    summerTotal:'$'+(summerTotal+w).toFixed(2),
+    gameTimeRequests:pendingReqs.length,
+    goal:document.getElementById('goalInput').value
+  };
   try {
     const params = new URLSearchParams({payload: JSON.stringify(payload)});
-    await fetch(SHEET_URL + '?' + params.toString(), {
-      method: 'GET',
-      mode: 'no-cors'
-    });
-    summerTotal+=w; checked={}; weeklyChecked={}; extraChecked={}; breakfasts={}; pendingReqs=[];
+    await fetch(SHEET_URL + '?' + params.toString(), { method:'GET', mode:'no-cors' });
+    summerTotal += w;
+    submittedWeek = wo;
+    checked={}; weeklyChecked={}; extraChecked={}; breakfasts={}; pendingReqs=[];
     save(); render();
-checkSundayReminder(); showToast('🎉 Week submitted! Amazing work, Aria!');
+    showToast('🎉 Week submitted! Amazing work, Aria!');
   } catch(err) {
-    summerTotal+=w; checked={}; weeklyChecked={}; extraChecked={}; breakfasts={}; pendingReqs=[];
+    summerTotal += w;
+    submittedWeek = wo;
+    checked={}; weeklyChecked={}; extraChecked={}; breakfasts={}; pendingReqs=[];
     save(); render();
-checkSundayReminder(); showToast('Saved locally - check connection');
+    showToast('Saved locally - check connection');
   }
-  btn.disabled=false; btn.textContent='✅ Submit My Week!';
 }
 
 function showToast(msg) {
@@ -396,29 +454,8 @@ function showToast(msg) {
   setTimeout(()=>t.classList.remove('show'),3000);
 }
 
-
-function getWeekOf() {
-  const now = new Date();
-  const day = now.getDay(); // 0=Sun
-  const monday = new Date(now);
-  monday.setDate(now.getDate() - (day === 0 ? 6 : day - 1));
-  return monday.toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'});
-}
-
-function checkSundayReminder() {
-  const now = new Date();
-  if (now.getDay() === 0) {
-    const banner = document.createElement('div');
-    banner.style.cssText = 'background:#fef2f2;border:2px solid #f87171;border-radius:14px;padding:12px 14px;margin-bottom:14px;font-size:13px;font-weight:800;color:#b91c1c;text-align:center;';
-    banner.innerHTML = "⚠️ It's Sunday! Don't forget to tap <strong>Submit My Week</strong> before the week resets!";
-    document.querySelector('.app').insertBefore(banner, document.querySelector('.reward-bar'));
-  }
-}
-
 document.getElementById('goalInput').addEventListener('input', update);
-
 render();
-checkSundayReminder();
 </script>
 </body>
 </html>
